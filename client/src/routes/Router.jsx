@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage"
 import ProtectedRoute from "./ProtectedRoute"
 import GuestLayout from "../layouts/GuestLayout"
 import UserLayout from "../layouts/UserLayout"
+import NotePage from "../pages/NotePage"
 
 const Router = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ const Router = createBrowserRouter([
             {index: true, element: <Navigate to="notes" />},
             {
                 path: "notes",
-                element: <div>User</div>,
+                element: <NotePage />,
             },
             {
                 path: "profile",
