@@ -1,19 +1,16 @@
-import {createBrowserRouter} from "react-router-dom"
+import {createBrowserRouter, Navigate} from "react-router-dom"
 import PublicRoute from "./PublicRoute"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
 import ProtectedRoute from "./ProtectedRoute"
 import GuestLayout from "../layouts/GuestLayout"
+import UserLayout from "../layouts/UserLayout"
 
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <PublicRoute />,
         children: [
-            {
-                index: true,
-                element: <GuestLayout />,
-            },
             {
                 path: "/login",
                 element: <LoginPage />,
@@ -25,9 +22,18 @@ const Router = createBrowserRouter([
         ],
     },
     {
+        path: "/guest",
+        element: <GuestLayout />,
+    },
+    {
         path: "/:name",
-        element: <ProtectedRoute />,
+        element: (
+            <ProtectedRoute>
+                <UserLayout />
+            </ProtectedRoute>
+        ),
         children: [
+            {index: true, element: <Navigate to="notes" />},
             {
                 path: "notes",
                 element: <div>User</div>,

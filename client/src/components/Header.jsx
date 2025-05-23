@@ -1,8 +1,11 @@
-export default function Header({children}) {
+import {Link} from "react-router-dom"
+export default function Header({children, path}) {
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">NoteSync</a>
+                <Link to={path} className="btn btn-ghost text-xl">
+                    NoteSync
+                </Link>
             </div>
             <div className="flex gap-2">{children}</div>
         </div>
