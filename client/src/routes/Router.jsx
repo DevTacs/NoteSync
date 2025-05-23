@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom"
 import PublicRoute from "./PublicRoute"
-import SigninPage from "../pages/SigninPage"
-import SignupPage from "../pages/SignupPage"
+import LoginPage from "../pages/LoginPage"
+import RegisterPage from "../pages/RegisterPage"
 import ProtectedRoute from "./ProtectedRoute"
 import GuestLayout from "../layouts/GuestLayout"
 
@@ -15,12 +15,12 @@ const Router = createBrowserRouter([
                 element: <GuestLayout />,
             },
             {
-                path: "/signin",
-                element: <SigninPage />,
+                path: "/login",
+                element: <LoginPage />,
             },
             {
-                path: "/signup",
-                element: <SignupPage />,
+                path: "/register",
+                element: <RegisterPage />,
             },
         ],
     },
