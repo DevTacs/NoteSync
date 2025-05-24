@@ -1,9 +1,10 @@
-import {createError} from "../utils/error.util.js"
+import createError from "http-errors"
 
 const validate = (schema) => (req, res, next) => {
     const result = schema.safeParse(req.body)
 
-    if (!result.success) return next(createError(400, result.error.message))
+    if (!result.success)
+        return next(createError(400, result.error.errors[0].message))
     req.body = result.data
     next()
 }

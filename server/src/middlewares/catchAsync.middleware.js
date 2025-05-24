@@ -5,3 +5,5 @@ const catchAsync = (cb) => async (req, res, next) => {
         next(createError(500, error.message))
     }
 }
+
+export default catchAsync
