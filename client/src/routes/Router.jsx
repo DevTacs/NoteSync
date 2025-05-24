@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate} from "react-router-dom"
+import {createBrowserRouter, Navigate, Outlet} from "react-router-dom"
 import PublicRoute from "./PublicRoute"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
@@ -6,18 +6,22 @@ import ProtectedRoute from "./ProtectedRoute"
 import GuestLayout from "../layouts/GuestLayout"
 import UserLayout from "../layouts/UserLayout"
 import NotePage from "../pages/NotePage"
+import BookmarkPage from "../pages/BookmarkPage"
+import ViewNotePage from "../pages/ViewNotePage"
+import EditNotePage from "../pages/EditNotePage"
 
 const Router = createBrowserRouter([
     {
-        path: "/",
+        path: "/auth",
         element: <PublicRoute />,
         children: [
+            {index: true, element: <Navigate to="login" replace />},
             {
-                path: "/login",
+                path: "login",
                 element: <LoginPage />,
             },
             {
-                path: "/register",
+                path: "register",
                 element: <RegisterPage />,
             },
         ],
@@ -27,7 +31,7 @@ const Router = createBrowserRouter([
         element: <GuestLayout />,
     },
     {
-        path: "/:name",
+        path: "/",
         element: (
             <ProtectedRoute>
                 <UserLayout />
@@ -37,11 +41,20 @@ const Router = createBrowserRouter([
             {index: true, element: <Navigate to="notes" />},
             {
                 path: "notes",
-                element: <NotePage />,
+                children: [
+                    {index: true, element: <NotePage />},
+                    {path: ":id", element: <ViewNotePage />},
+                ],
             },
             {
-                path: "profile",
-                element: <div>Profile</div>,
+                path: ":name",
+                children: [
+                    {path: "bookmarks", element: <BookmarkPage />},
+                    {
+                        path: "edit",
+                        element: <EditNotePage />,
+                    },
+                ],
             },
         ],
     },

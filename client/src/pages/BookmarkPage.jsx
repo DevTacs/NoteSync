@@ -1,9 +1,7 @@
 import React from "react"
-import NoteForm from "../components/NoteForm"
 import NoteCard from "../components/NoteCard"
-import {Outlet} from "react-router-dom"
 
-export default function NotePage() {
+export default function BookmarkPage() {
     const [notes, setNotes] = React.useState([
         {
             author: "User1",
@@ -147,17 +145,34 @@ export default function NotePage() {
         },
     ])
     return (
-        <div className="flex py-8 px-10">
-            <div>
-                <h2 className="text-2xl font-bold">My Notes</h2>
-                <p className="mb-8">Create and manage your personal notes</p>
-                <NoteForm
-                    label={"Create"}
-                    handleClick={() => console.log("Create")}
-                />
+        <div className="flex flex-col py-8 px-10">
+            <div className="flex flex-row justify-between items-center pb-5 mb-5 border-b-1 border-accent">
+                <h2 className="text-lg font-bold">Bookmarks</h2>
+                <div className="join">
+                    <div>
+                        <div>
+                            <input
+                                className="input join-item"
+                                placeholder="Search"
+                            />
+                        </div>
+                    </div>
+                    <select className="select join-item w-[100px]">
+                        <option disabled selected>
+                            Filter
+                        </option>
+                        <option>Sci-fi</option>
+                        <option>Drama</option>
+                        <option>Action</option>
+                    </select>
+                    <div className="indicator">
+                        <button className="btn btn-accent join-item">
+                            Search
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div className="divider divider-horizontal"></div>
-            <div className="grid grid-cols-3 place-items-center gap-4">
+            <div className="grid grid-cols-3 place-items-center gap-4 px-30">
                 {notes &&
                     notes.map((note) => (
                         <NoteCard
@@ -169,7 +184,7 @@ export default function NotePage() {
                             createdAt={note.createdAt}
                         />
                     ))}
-            </div>
+            </div>{" "}
         </div>
     )
 }

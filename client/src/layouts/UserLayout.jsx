@@ -3,16 +3,21 @@ import Header from "../components/Header"
 import ThemeController from "../components/ThemeController"
 
 export default function UserLayout() {
+    const user = "User1"
     return (
         <>
-            <Header path={"/user"}>
-                <Header.SearchField />
+            <Header path={"/"}>
                 <Header.Profile>
                     <li>
-                        <Link to={"profile"}>Profile</Link>
+                        <Link to="notes">Notes</Link>
                     </li>
                     <li>
-                        <Link to="notes">Notes</Link>
+                        <Link to={`${user}/bookmarks`}>
+                            Bookmarks
+                            <div className="badge badge-accent text-xs p-1">
+                                0
+                            </div>
+                        </Link>
                     </li>
                     <li>
                         <div className="justify-between">
