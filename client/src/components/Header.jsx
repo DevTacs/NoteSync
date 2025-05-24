@@ -12,16 +12,6 @@ export default function Header({children, path}) {
     )
 }
 
-Header.SearchField = () => {
-    return (
-        <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-        />
-    )
-}
-
 Header.Profile = ({children}) => {
     return (
         <div className="dropdown dropdown-end">
