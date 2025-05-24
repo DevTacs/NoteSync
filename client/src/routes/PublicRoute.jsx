@@ -1,7 +1,7 @@
 import {Navigate, Outlet} from "react-router-dom"
 
-export default function PublicRoute() {
+export default function PublicRoute({children}) {
     const isLoggedIn = false
 
-    return !isLoggedIn ? <Outlet /> : <Navigate to="/user" />
+    return !isLoggedIn ? children : <Navigate to="/user" />
 }

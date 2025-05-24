@@ -9,11 +9,16 @@ import NotePage from "../pages/NotePage"
 import BookmarkPage from "../pages/BookmarkPage"
 import ViewNotePage from "../pages/ViewNotePage"
 import EditNotePage from "../pages/EditNotePage"
+import AuthLayout from "../layouts/AuthLayout"
 
 const Router = createBrowserRouter([
     {
         path: "/auth",
-        element: <PublicRoute />,
+        element: (
+            <PublicRoute>
+                <AuthLayout />
+            </PublicRoute>
+        ),
         children: [
             {index: true, element: <Navigate to="login" replace />},
             {
