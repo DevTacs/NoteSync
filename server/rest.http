@@ -2,6 +2,17 @@ post http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "",
-    "password": ""
+    "username": "user1",
+    "email": "skylantern19@gmail.com",
+    "password": "user1"
+}
+
+###
+
+post http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "skylantern19@gmail.com",
+    "password": "user1"
 }
