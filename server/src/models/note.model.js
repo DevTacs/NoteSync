@@ -1,14 +1,4 @@
 import mongoose from "mongoose"
-
-const NoteSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        trim: true,
-    },
-    content: {
-        type: String,
-        trim: true,
-    },
-})
+import NoteSchema from "..schemas/note.schema.js"
 
 export default mongoose.model("Note", NoteSchema)
