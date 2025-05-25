@@ -13,10 +13,11 @@ export const login = async (req, res, next) => {
 
     const user = await getUserDetailsByEmail(email)
     if (!user) return next(createError(404, "User not found"))
-    console.log(user)
 
-    if (!comparePassword(password, user.password))
+    const isPasswordCorrect = await comparePassword(password, user.password)
+    if (!isPasswordCorrect) {
         return next(createError(400, "Invalid credentials"))
+    }
 
     const payload = {
         id: user._id,
