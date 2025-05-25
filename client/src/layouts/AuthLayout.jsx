@@ -5,7 +5,7 @@ import ThemeController from "../components/ThemeController"
 export default function AuthLayout() {
     return (
         <>
-            <Header>
+            <Header path="/guest">
                 <ThemeController />
             </Header>
             <Outlet />

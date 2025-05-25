@@ -1,7 +1,7 @@
-import {Navigate, Outlet} from "react-router-dom"
+import {Navigate, useLoaderData} from "react-router-dom"
 
 export default function PublicRoute({children}) {
-    const isLoggedIn = false
+    const isLoggedIn = useLoaderData()
 
-    return !isLoggedIn ? children : <Navigate to="/user" />
+    return !isLoggedIn ? children : <Navigate to="/" />
 }

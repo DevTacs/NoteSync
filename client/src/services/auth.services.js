@@ -7,3 +7,5 @@ console.log(backendUrl)
 export const login = (data) => axios.post(`${backendUrl}/api/auth/login`, data)
 export const register = (data) =>
     axios.post(`${backendUrl}/api/auth/register`, data)
+
+export const checkAuthentication = () => axios.get(`${backendUrl}/api/auth/me`)

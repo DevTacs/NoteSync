@@ -6,7 +6,7 @@ export default function UserLayout() {
     const user = "User1"
     return (
         <>
-            <Header path={"/"}>
+            <Header path="/">
                 <Header.Profile>
                     <li>
                         <Link to="notes">Notes</Link>

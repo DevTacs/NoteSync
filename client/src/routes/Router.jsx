@@ -10,6 +10,7 @@ import BookmarkPage from "../pages/BookmarkPage"
 import ViewNotePage from "../pages/ViewNotePage"
 import EditNotePage from "../pages/EditNotePage"
 import AuthLayout from "../layouts/AuthLayout"
+import {checkAuthentication} from "../services/auth.services"
 
 const Router = createBrowserRouter([
     {
@@ -19,6 +20,15 @@ const Router = createBrowserRouter([
                 <AuthLayout />
             </PublicRoute>
         ),
+        loader: async () => {
+            try {
+                const data = await checkAuthentication()
+                console.log(data)
+                return data
+            } catch (error) {
+                return null
+            }
+        },
         children: [
             {index: true, element: <Navigate to="login" replace />},
             {
@@ -34,6 +44,16 @@ const Router = createBrowserRouter([
     {
         path: "/guest",
         element: <GuestLayout />,
+        loader: async () => {
+            try {
+                const data = await checkAuthentication()
+                console.log(data)
+                return data
+            } catch (error) {
+                return null
+            }
+        },
+        children: [{index: true, element: <NotePage />}],
     },
     {
         path: "/",

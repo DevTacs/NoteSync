@@ -8,11 +8,16 @@ import {
 import {hashPassword, comparePassword} from "../utils/hash.util.js"
 import {createUser, getUserDetailsByEmail} from "../services/user.service.js"
 
+export const checkMe = (req, res, next) => {
+    const {id, username, email} = req.user
+    res.status(200).json({id, username, email, message: "You are logged in"})
+}
+
 export const login = async (req, res, next) => {
     const {email, password} = req.body
 
     const user = await getUserDetailsByEmail(email)
-    if (!user) return next(createError(404, "User not found"))
+    if (!user) return next(createError(404, {message: "User not found"}))
 
     const isPasswordCorrect = await comparePassword(password, user.password)
     if (!isPasswordCorrect) {
@@ -35,7 +40,7 @@ export const login = async (req, res, next) => {
     )
 
     createCookie("accessToken", accessToken, minutesToMilliseconds(15), res)
-    createCookie("refreshToken", refreshToken, minutesToMilliseconds(7), res)
+    createCookie("refreshToken", refreshToken, daysToMilliseconds(7), res)
     res.status(200).json({message: "Login successful"})
 }
 

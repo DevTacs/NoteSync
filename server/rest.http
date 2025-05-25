@@ -16,3 +16,7 @@ Content-Type: application/json
     "email": "skylantern19@gmail.com",
     "password": "user1"
 }
+
+###
+
+get http://localhost:3000/api/auth/me

@@ -1,20 +1,19 @@
-import {Link} from "react-router-dom"
+import {Link, Outlet} from "react-router-dom"
 import Header from "../components/Header"
 import ThemeController from "../components/ThemeController"
 
 export default function GuestLayout() {
     return (
         <>
-            <Header>
-                <Header.SearchField />
+            <Header path="/guest">
                 <Header.Profile>
                     <li>
-                        <Link className="" to="/login">
+                        <Link className="" to="/auth/login">
                             Login
                         </Link>
                     </li>
                     <li>
-                        <Link className="" to="/register">
+                        <Link className="" to="/auth/register">
                             Register
                         </Link>
                     </li>
@@ -26,6 +25,7 @@ export default function GuestLayout() {
                     </li>
                 </Header.Profile>
             </Header>
+            <Outlet />
         </>
     )
 }
