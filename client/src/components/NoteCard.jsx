@@ -1,13 +1,12 @@
-import {Link, useNavigate} from "react-router-dom"
-import {AiOutlineBook, AiOutlineDelete, AiOutlineEdit} from "react-icons/ai"
+import {useNavigate} from "react-router-dom"
+import {AiOutlineBook} from "react-icons/ai"
 
 export default function NoteCard({author, id, title, content, createdAt}) {
-    const user = "User1"
     const navigate = useNavigate()
     return (
         <div
             className="card w-90 bg-base-100 card-md shadow-sm shadow-accent"
-            onClick={() => navigate(`/notes/${id}`)}>
+            onClick={() => navigate(`${id}`)}>
             <div className="card-body">
                 <div className="flex flex-row items-center justify-between gap-2">
                     <div className="badge badge-accent text-xs">{author}</div>
@@ -16,18 +15,6 @@ export default function NoteCard({author, id, title, content, createdAt}) {
                             size={20}
                             onClick={() => console.log("Bookmark")}
                         />
-                        {user === author && (
-                            <>
-                                {/* <AiOutlineEdit
-                                    size={20}
-                                    onClick={() => navigate(`/notes/${id}`)}
-                                /> */}
-                                {/* <AiOutlineDelete
-                                    size={20}
-                                    onClick={() => console.log("Delete")}
-                                /> */}
-                            </>
-                        )}
                     </div>
                 </div>
                 <div>

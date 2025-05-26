@@ -10,7 +10,7 @@ export default function ViewNotePage() {
             </div>
             <p>Content</p>
             <div className="flex gap-2 ">
-                <Link className="btn btn-accent" to="/notes">
+                <Link className="btn btn-accent" to="/user/notes">
                     Notes
                 </Link>
                 <Link className="btn btn-info" to="/User1/edit">
