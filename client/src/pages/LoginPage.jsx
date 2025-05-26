@@ -29,20 +29,24 @@ export default function LoginPage() {
             className="w-[350px] flex flex-col gap-2 my-[50px] p-8 mx-auto shadow-xs shadow-accent rounded-md "
             onSubmit={handleSubmit(handleLogin)}>
             <h2 className="text-2xl font-bold text-center">Login</h2>
-            <Fieldset
-                control={control}
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your email"
-            />
-            <Fieldset
-                control={control}
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-            />
+            <fieldset>
+                <Fieldset>
+                    <Fieldset.Input
+                        control={control}
+                        name="email"
+                        type="email"
+                        label="Email"
+                        placeholder="Enter your email"
+                    />
+                    <Fieldset.Input
+                        control={control}
+                        name="password"
+                        type="password"
+                        label="Password"
+                        placeholder="Enter your password"
+                    />
+                </Fieldset>
+            </fieldset>
             <button
                 className="btn btn-accent"
                 disabled={!isValid || isSubmitting}>

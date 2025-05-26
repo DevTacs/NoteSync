@@ -29,27 +29,29 @@ export default function RegisterPage() {
             <h2 className="text-2xl font-bold text-center">
                 Create an Account
             </h2>
-            <Fieldset
-                control={control}
-                name="username"
-                type="text"
-                label="Username"
-                placeholder="Enter your username"
-            />
-            <Fieldset
-                control={control}
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your email"
-            />
-            <Fieldset
-                control={control}
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-            />
+            <Fieldset>
+                <Fieldset.Input
+                    control={control}
+                    name="username"
+                    label="Username"
+                    type="text"
+                    placeholder="Enter your username"
+                />
+                <Fieldset.Input
+                    control={control}
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Enter your email"
+                />
+                <Fieldset.Input
+                    control={control}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    placeholder="Enter your password"
+                />
+            </Fieldset>
             <button
                 className="btn btn-accent"
                 disabled={!isValid || isSubmitting}>

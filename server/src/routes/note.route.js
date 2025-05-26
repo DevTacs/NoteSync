@@ -7,7 +7,7 @@ import {
 
 const router = express.Router()
 
-router.get("/", checkAuth, getNotesController)
+router.get("/", getNotesController)
 router.post("/", checkAuth, createNoteController)
 
 export default router

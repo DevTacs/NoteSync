@@ -1,6 +1,7 @@
 import axios from "../utils/axios.util"
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
+console.log(backendUrl)
 
 export const getNotesService = async () => {
     const {data} = await axios.get(`${backendUrl}/api/notes`)
