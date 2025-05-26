@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 import Fieldset from "../components/Fieldset"
-import {register} from "../services/auth.services"
+import {register} from "../services/auth.service"
 import {showSuccessDialog, showErrorDialog} from "../utils/alert.util"
 import useRegisterForm from "../hooks/useRegisterForm"
 

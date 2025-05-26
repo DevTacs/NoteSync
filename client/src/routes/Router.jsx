@@ -1,16 +1,19 @@
-import {createBrowserRouter, Navigate, Outlet} from "react-router-dom"
-import PublicRoute from "./PublicRoute"
-import LoginPage from "../pages/LoginPage"
-import RegisterPage from "../pages/RegisterPage"
-import ProtectedRoute from "./ProtectedRoute"
-import GuestLayout from "../layouts/GuestLayout"
-import UserLayout from "../layouts/UserLayout"
-import NotePage from "../pages/NotePage"
-import BookmarkPage from "../pages/BookmarkPage"
-import ViewNotePage from "../pages/ViewNotePage"
-import EditNotePage from "../pages/EditNotePage"
-import AuthLayout from "../layouts/AuthLayout"
-import {checkAuthentication} from "../services/auth.services"
+import {lazy} from "react"
+import {createBrowserRouter, Navigate} from "react-router-dom"
+import {checkAuthentication} from "../services/auth.service"
+
+const PublicRoute = lazy(() => import("./PublicRoute"))
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"))
+const AuthLayout = lazy(() => import("../layouts/AuthLayout"))
+const GuestLayout = lazy(() => import("../layouts/GuestLayout"))
+const UserLayout = lazy(() => import("../layouts/UserLayout"))
+const LoginPage = lazy(() => import("../pages/LoginPage"))
+const RegisterPage = lazy(() => import("../pages/RegisterPage"))
+const NotePage = lazy(() => import("../pages/NotePage"))
+const BookmarkPage = lazy(() => import("../pages/BookmarkPage"))
+const ViewNotePage = lazy(() => import("../pages/ViewNotePage"))
+const EditNotePage = lazy(() => import("../pages/EditNotePage"))
+import PageNotFound from "../pages/PageNotFound"
 
 const Router = createBrowserRouter([
     {
@@ -23,7 +26,6 @@ const Router = createBrowserRouter([
         loader: async () => {
             try {
                 const data = await checkAuthentication()
-                console.log(data)
                 return data
             } catch (error) {
                 return null
@@ -43,12 +45,17 @@ const Router = createBrowserRouter([
     },
     {
         path: "/guest",
-        element: <GuestLayout />,
+        element: (
+            <PublicRoute>
+                <GuestLayout />
+            </PublicRoute>
+        ),
         loader: async () => {
             try {
-                const data = await checkAuthentication()
-                console.log(data)
-                return data
+                const {
+                    data: {user},
+                } = await checkAuthentication()
+                return user
             } catch (error) {
                 return null
             }
@@ -56,12 +63,23 @@ const Router = createBrowserRouter([
         children: [{index: true, element: <NotePage />}],
     },
     {
-        path: "/",
+        path: "/user",
+        name: "user",
         element: (
             <ProtectedRoute>
                 <UserLayout />
             </ProtectedRoute>
         ),
+        loader: async () => {
+            try {
+                const {
+                    data: {user},
+                } = await checkAuthentication()
+                return user
+            } catch (error) {
+                return null
+            }
+        },
         children: [
             {index: true, element: <Navigate to="notes" />},
             {
@@ -72,16 +90,18 @@ const Router = createBrowserRouter([
                 ],
             },
             {
-                path: ":name",
-                children: [
-                    {path: "bookmarks", element: <BookmarkPage />},
-                    {
-                        path: "edit",
-                        element: <EditNotePage />,
-                    },
-                ],
+                path: "bookmarks",
+                element: <BookmarkPage />,
+            },
+            {
+                path: "edit",
+                element: <EditNotePage />,
             },
         ],
+    },
+    {
+        path: "*",
+        element: <PageNotFound />,
     },
 ])
 

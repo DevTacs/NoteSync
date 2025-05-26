@@ -1,7 +1,7 @@
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import useLoginForm from "../hooks/useLoginForm"
 import Fieldset from "../components/Fieldset"
-import {login} from "../services/auth.services"
+import {login} from "../services/auth.service"
 import {showErrorDialog, showSuccessDialog} from "../utils/alert.util"
 
 export default function LoginPage() {
@@ -11,11 +11,13 @@ export default function LoginPage() {
         handleSubmit,
         formState: {isValid, isSubmitting},
     } = useLoginForm()
+    const navigate = useNavigate()
 
     const handleLogin = async (data) => {
         try {
             const response = await login(data)
-            showSuccessDialog("Success", response.data.message)
+            await showSuccessDialog("Success", response.data.message)
+            navigate("/notes")
         } catch (error) {
             showErrorDialog("Error", error.response.data.message)
         }

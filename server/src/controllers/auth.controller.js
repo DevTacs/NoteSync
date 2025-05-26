@@ -10,7 +10,10 @@ import {createUser, getUserDetailsByEmail} from "../services/user.service.js"
 
 export const checkMe = (req, res, next) => {
     const {id, username, email} = req.user
-    res.status(200).json({id, username, email, message: "You are logged in"})
+    res.status(200).json({
+        user: {id, username, email},
+        message: "You are logged in",
+    })
 }
 
 export const login = async (req, res, next) => {

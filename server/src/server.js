@@ -17,7 +17,9 @@ import connectDB from "./configs/database.config.js"
 connectDB()
 
 import authRoute from "./routes/auth.route.js"
+import noteRoute from "./routes/note.route.js"
 app.use("/api/auth", authRoute)
+app.use("/api/notes", noteRoute)
 
 import errorHandler from "./middlewares/error.middleware.js"
 app.use(errorHandler)

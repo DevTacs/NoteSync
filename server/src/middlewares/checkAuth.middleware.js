@@ -10,8 +10,9 @@ import {minutesToMilliseconds} from "../utils/expiry.util.js"
 const checkAuth = (req, res, next) => {
     const {accessToken, refreshToken} = req.cookies
 
-    if (!accessToken && !refreshToken)
+    if (!accessToken && !refreshToken) {
         return next(createError(401, "Unauthorized"))
+    }
 
     try {
         if (!accessToken) {

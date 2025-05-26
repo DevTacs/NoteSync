@@ -148,7 +148,7 @@ export default function BookmarkPage() {
         <div className="flex flex-col py-8 px-10">
             <div className="flex flex-row justify-between items-center pb-5 mb-5 border-b-1 border-accent">
                 <h2 className="text-lg font-bold">Bookmarks</h2>
-                <div className="join">
+                {/* <div className="join">
                     <div>
                         <div>
                             <input
@@ -170,7 +170,7 @@ export default function BookmarkPage() {
                             Search
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="grid grid-cols-3 place-items-center gap-4 px-30">
                 {notes &&

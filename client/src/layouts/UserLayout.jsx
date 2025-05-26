@@ -3,16 +3,15 @@ import Header from "../components/Header"
 import ThemeController from "../components/ThemeController"
 
 export default function UserLayout() {
-    const user = "User1"
     return (
         <>
-            <Header path="/">
+            <Header path="/user">
                 <Header.Profile>
                     <li>
-                        <Link to="notes">Notes</Link>
+                        <Link to="/user/notes">Notes</Link>
                     </li>
                     <li>
-                        <Link to={`${user}/bookmarks`}>
+                        <Link to="bookmarks">
                             Bookmarks
                             <div className="badge badge-accent text-xs p-1">
                                 0
