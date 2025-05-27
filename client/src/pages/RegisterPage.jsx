@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 import Fieldset from "../components/Fieldset"
 import {register} from "../services/auth.service"
 import {showSuccessDialog, showErrorDialog} from "../utils/alert.util"
-import useRegisterForm from "../hooks/useRegisterForm"
+import {useRegisterForm} from "../hooks/forms/auth.form"
 
 export default function RegisterPage() {
     const {

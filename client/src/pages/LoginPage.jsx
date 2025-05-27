@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom"
-import useLoginForm from "../hooks/useLoginForm"
+import {useLoginForm} from "../hooks/forms/auth.form"
 import Fieldset from "../components/Fieldset"
 import {login} from "../services/auth.service"
 import {showErrorDialog, showSuccessDialog} from "../utils/alert.util"

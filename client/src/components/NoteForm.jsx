@@ -1,5 +1,5 @@
-import {useCreateNoteMutation} from "../hooks/useNoteMutation"
-import {useNoteForm} from "../hooks/useNoteForm"
+import {useCreateNoteMutation} from "../hooks/mutations/note.mutation"
+import {useNoteForm} from "../hooks/forms/note.form"
 import {showSuccessDialog, showErrorDialog} from "../utils/alert.util"
 import Fieldset from "./Fieldset"
 

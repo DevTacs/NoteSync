@@ -1,9 +1,9 @@
 import NoteForm from "../components/NoteForm"
 import NotePanel from "../components/NotePanel"
-import {useNotesQuery} from "../hooks/useNoteQuery"
+import {useGetNotesQuery} from "../hooks/queries/note.query"
 
 export default function NotePage() {
-    const {data: notes = [], error, isLoading} = useNotesQuery()
+    const {data: notes = [], error, isLoading} = useGetNotesQuery()
 
     return (
         <div className="flex flex-row py-8 px-10">
