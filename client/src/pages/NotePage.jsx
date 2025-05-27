@@ -6,7 +6,7 @@ export default function NotePage() {
     const {data: notes = [], error, isLoading} = useGetNotesQuery()
 
     return (
-        <div className="flex flex-row py-8 px-10">
+        <div className="h-[calc(100vh-110px)] flex flex-row px-10 my-5">
             <div>
                 <h2 className="text-2xl font-bold">My Notes</h2>
                 <p className="mb-8">Create and manage your personal notes</p>

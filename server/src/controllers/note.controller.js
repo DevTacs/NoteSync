@@ -22,7 +22,12 @@ export const getNoteByIDController = async (req, res, next) => {
 }
 
 export const createNoteController = async (req, res, next) => {
-    const note = await createNoteService(req.body)
+    const data = {
+        ...req.body,
+        authorID: req.user.id,
+        author: req.user.username,
+    }
+    const note = await createNoteService(data)
 
     if (!note) return next(createError(500, "Error creating note"))
 

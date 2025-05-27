@@ -10,8 +10,10 @@ export default function NotePanel({notes, error, isLoading}) {
             showErrorDialog("Error", error.message)
     }, [error])
 
+    console.log(notes)
+
     return (
-        <div className="flex-[1] flex flex-col ">
+        <div className="flex-[1] flex flex-col">
             <NoteHeader title="Notes" />
             <div className="mt-5">
                 {notes.length === 0 && !isLoading && (
@@ -19,7 +21,7 @@ export default function NotePanel({notes, error, isLoading}) {
                         No notes found
                     </p>
                 )}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-4 h-[550px] overflow-y-scroll overflow-x-hidden">
                     {isLoading
                         ? Array.from({length: 6}).map((_, i) => (
                               <Skeleton key={i} />
@@ -29,6 +31,8 @@ export default function NotePanel({notes, error, isLoading}) {
                               <NoteCard
                                   key={note._id}
                                   id={note._id}
+                                  author={note.author}
+                                  createdAt={note.createdAt}
                                   title={note.title}
                                   content={note.content}
                               />
