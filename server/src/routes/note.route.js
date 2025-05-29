@@ -7,17 +7,26 @@ import {
     createNoteController,
     getNotesController,
     getNoteByIDController,
+    getBookmarksController,
+    toggleBookmarkController,
+    getBookmarksByIDController,
 } from "../controllers/note.controller.js"
 
 const router = express.Router()
 
-router.get("/", catchAsync(getNotesController))
+router
+    .route("/")
+    .get(checkAuth, catchAsync(getNotesController))
+    .post(
+        validate(createNoteSchema),
+        checkAuth,
+        catchAsync(createNoteController)
+    )
+router
+    .route("/bookmarks")
+    .get(checkAuth, catchAsync(getBookmarksController))
+    .put(checkAuth, catchAsync(toggleBookmarkController))
+router.get("/bookmarks/:id", catchAsync(getBookmarksByIDController))
 router.get("/:id", catchAsync(getNoteByIDController))
-router.post(
-    "/",
-    validate(createNoteSchema),
-    checkAuth,
-    catchAsync(createNoteController)
-)
 
 export default router

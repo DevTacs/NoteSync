@@ -64,7 +64,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/user",
-        name: "user",
+        id: "user",
         element: (
             <ProtectedRoute>
                 <UserLayout />
@@ -84,6 +84,7 @@ const Router = createBrowserRouter([
             {index: true, element: <Navigate to="notes" />},
             {
                 path: "notes",
+                loader: async () => {},
                 children: [
                     {index: true, element: <NotePage />},
                     {path: ":id", element: <ViewNotePage />},

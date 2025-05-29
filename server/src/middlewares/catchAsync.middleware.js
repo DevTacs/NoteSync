@@ -4,7 +4,7 @@ const catchAsync = (cb) => async (req, res, next) => {
     try {
         return await cb(req, res, next)
     } catch (error) {
-        next(createError(500, error.message))
+        return next(createError(500, error))
     }
 }
 

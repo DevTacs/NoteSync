@@ -1,28 +1,37 @@
+import {useEffect} from "react"
 import NoteCard from "./NoteCard"
 import Skeleton from "./Skeleton"
 import NoteHeader from "./NoteHeader"
 import {showErrorDialog} from "../utils/alert.util"
-import {useEffect} from "react"
+import {useBookmark} from "../context/BookmarkContext"
+import {useGetBookmarksQuery} from "../hooks/queries/note.query"
 
-export default function NotePanel({notes, error, isLoading}) {
+export default function NotePanel({notes, error, isNoteLoading}) {
+    const {data = [], isBookmarkLoading} = useGetBookmarksQuery()
+    const {setBookmarks} = useBookmark()
+
     useEffect(() => {
         if (error && error.status !== 404)
             showErrorDialog("Error", error.message)
     }, [error])
 
-    console.log(notes)
+    useEffect(() => {
+        if (!isBookmarkLoading && data.length > 0) {
+            setBookmarks(data)
+        }
+    }, [data, isBookmarkLoading])
 
     return (
         <div className="flex-[1] flex flex-col">
             <NoteHeader title="Notes" />
             <div className="mt-5">
-                {notes.length === 0 && !isLoading && (
+                {notes.length === 0 && !isNoteLoading && (
                     <p className=" p-4 bg-accent text-2xl text-center rounded-md">
                         No notes found
                     </p>
                 )}
-                <div className="grid grid-cols-3 gap-4 h-[550px] overflow-y-scroll overflow-x-hidden">
-                    {isLoading
+                <div className="grid grid-cols-3 gap-4 h-[550px] overflow-y-scroll overflow-x-hidden items-start">
+                    {isNoteLoading
                         ? Array.from({length: 6}).map((_, i) => (
                               <Skeleton key={i} />
                           ))
@@ -31,7 +40,8 @@ export default function NotePanel({notes, error, isLoading}) {
                               <NoteCard
                                   key={note._id}
                                   id={note._id}
-                                  author={note.author}
+                                  authorID={note.author.authorID}
+                                  authorName={note.author.authorName}
                                   createdAt={note.createdAt}
                                   title={note.title}
                                   content={note.content}

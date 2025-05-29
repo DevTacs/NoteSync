@@ -1,5 +1,9 @@
 import {useQuery} from "@tanstack/react-query"
-import {getNotesService, getNoteByIDService} from "../../services/note.service"
+import {
+    getNotesService,
+    getNoteByIDService,
+    getBookmarksService,
+} from "../../services/note.service"
 
 export const useGetNotesQuery = () => {
     return useQuery({
@@ -12,5 +16,12 @@ export const useGetNoteQuery = (id) => {
     return useQuery({
         queryKey: ["notes", id],
         queryFn: async () => await getNoteByIDService(id),
+    })
+}
+
+export const useGetBookmarksQuery = () => {
+    return useQuery({
+        queryKey: ["bookmarks"],
+        queryFn: async () => await getBookmarksService(),
     })
 }

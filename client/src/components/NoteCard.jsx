@@ -1,9 +1,14 @@
 import {useNavigate} from "react-router-dom"
-import {FaHeart} from "react-icons/fa6"
-import {useState} from "react"
+import BookmarkIcon from "./BookmarkIcon"
 
-export default function NoteCard({author, id, title, content, createdAt}) {
-    const [like, setLike] = useState(false)
+export default function NoteCard({
+    authorID,
+    authorName,
+    id,
+    title,
+    content,
+    createdAt,
+}) {
     const navigate = useNavigate()
     return (
         <div
@@ -17,8 +22,11 @@ export default function NoteCard({author, id, title, content, createdAt}) {
                         </h2>
                         <div className="flex flex-row justify-between">
                             <p className="text-sm text-gray-500 dark:text-gray-400">
-                                by <span className="font-medium">{author}</span>
-                                •
+                                by{" "}
+                                <span className="font-medium">
+                                    {authorName}
+                                </span>
+                                <span className="mx-1">•</span>
                                 <span>
                                     {new Date(createdAt).toDateString()}
                                 </span>
@@ -27,21 +35,12 @@ export default function NoteCard({author, id, title, content, createdAt}) {
                     </div>
                 </div>
 
-                <div className="h-[70px] max-h-[70px] text-sm/tight text-left  ">
+                <div className="h-[70px] max-h-[70px] text-sm/tight">
                     {`${content.substring(0, 100)}...`}
                 </div>
 
-                <div className="relative w-full h-5 mt-6  ">
-                    <FaHeart
-                        size={20}
-                        className={`absolute  top-0 right-0 cursor-pointer ${
-                            like ? "text-red-500" : ""
-                        }`}
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setLike(!like)
-                        }}
-                    />
+                <div className="flex flex-row justify-end h-5 mt-2">
+                    <BookmarkIcon noteID={id} />
                 </div>
             </div>
         </div>

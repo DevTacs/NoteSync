@@ -5,17 +5,19 @@ const NoteSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    authorID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
     author: {
-        type: String,
-        trim: true,
+        authorID: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
+        authorName: {
+            type: String,
+            trim: true,
+        },
     },
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: () => Date.now(),
     },
     content: {
         type: String,
