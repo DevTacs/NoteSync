@@ -15,6 +15,6 @@ const router = express.Router()
 router.get("/me", checkAuth, catchAsync(checkMe))
 router.post("/login", validate(loginSchema), catchAsync(login))
 router.post("/register", validate(registerSchema), catchAsync(register))
-router.delete("/logout", catchAsync(logout))
+router.delete("/logout", checkAuth, catchAsync(logout))
 
 export default router

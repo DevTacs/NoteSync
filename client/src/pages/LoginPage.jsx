@@ -17,7 +17,7 @@ export default function LoginPage() {
         try {
             const response = await login(data)
             await showSuccessDialog("Success", response.data.message)
-            navigate("/notes")
+            navigate("/user/notes")
         } catch (error) {
             showErrorDialog("Error", error.response.data.message)
         }

@@ -14,6 +14,7 @@ const BookmarkPage = lazy(() => import("../pages/BookmarkPage"))
 const ViewNotePage = lazy(() => import("../pages/ViewNotePage"))
 const EditNotePage = lazy(() => import("../pages/EditNotePage"))
 import PageNotFound from "../pages/PageNotFound"
+import {BookmarkProvider} from "../context/BookmarkContext"
 
 const Router = createBrowserRouter([
     {
@@ -86,7 +87,10 @@ const Router = createBrowserRouter([
                 path: "notes",
                 loader: async () => {},
                 children: [
-                    {index: true, element: <NotePage />},
+                    {
+                        index: true,
+                        element: <NotePage />,
+                    },
                     {path: ":id", element: <ViewNotePage />},
                 ],
             },

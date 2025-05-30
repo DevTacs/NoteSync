@@ -9,7 +9,6 @@ import {
     getNoteByIDController,
     getBookmarksController,
     toggleBookmarkController,
-    getBookmarksByIDController,
 } from "../controllers/note.controller.js"
 
 const router = express.Router()
@@ -22,11 +21,8 @@ router
         checkAuth,
         catchAsync(createNoteController)
     )
-router
-    .route("/bookmarks")
-    .get(checkAuth, catchAsync(getBookmarksController))
-    .put(checkAuth, catchAsync(toggleBookmarkController))
-router.get("/bookmarks/:id", catchAsync(getBookmarksByIDController))
+router.route("/bookmarks").get(checkAuth, catchAsync(getBookmarksController))
+router.get("/bookmarks/:id", checkAuth, catchAsync(toggleBookmarkController))
 router.get("/:id", catchAsync(getNoteByIDController))
 
 export default router

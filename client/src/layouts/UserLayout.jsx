@@ -1,8 +1,22 @@
-import {Link, Outlet} from "react-router-dom"
+import {Link, Outlet, useNavigate} from "react-router-dom"
 import Header from "../components/Header"
 import ThemeController from "../components/ThemeController"
+import {logout} from "../services/auth.service"
+import {showErrorDialog, showSuccessDialog} from "../utils/alert.util"
 
 export default function UserLayout() {
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            const {message} = await logout()
+            await showSuccessDialog("Success", message)
+            navigate("/auth/login")
+        } catch (error) {
+            showErrorDialog("Error", error.message)
+        }
+    }
+
     return (
         <>
             <Header path="/user">
@@ -25,7 +39,7 @@ export default function UserLayout() {
                         </div>
                     </li>
                     <li>
-                        <button>Logout</button>
+                        <button onClick={handleLogout}>Logout</button>
                     </li>
                 </Header.Profile>
             </Header>

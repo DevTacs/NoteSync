@@ -3,10 +3,12 @@ import {
     getNotesService,
     getNoteByIDService,
     createNoteService,
+} from "../services/note.service.js"
+import {
+    getBookmarksService,
     addBookmarkByIDService,
     removeBookmarkByIDService,
-    getBookmarksService,
-} from "../services/note.service.js"
+} from "../services/user.service.js"
 
 export const getNotesController = async (req, res, next) => {
     const notes = await getNotesService()
@@ -39,29 +41,22 @@ export const createNoteController = async (req, res, next) => {
     res.status(201).json({message: "Note created successfully"})
 }
 
-import User from "../models/user.model.js"
-
 export const getBookmarksController = async (req, res, next) => {
     const bookmarks = await getBookmarksService(req.user.id)
     res.status(200).json(bookmarks)
 }
 
-export const getBookmarksByIDController = async (req, res, next) => {
-    res.send("getBookmarksByIDController")
-}
 export const toggleBookmarkController = async (req, res, next) => {
-    const {noteID} = req.body
+    const noteID = req.params.id
 
     const note = await getNoteByIDService(noteID)
     if (!note) return next(createError(404, {message: "Note not found"}))
 
     const result = await addBookmarkByIDService(req.user.id, note._id)
-    if (!result) return next(createError(400, "Error adding bookmark"))
-
     const alreadyBookmarked = result.bookmarks.includes(note._id)
     if (alreadyBookmarked) {
         await removeBookmarkByIDService(req.user.id, note._id)
-        res.status(200).json({bookmarked: false})
+        return res.status(200).json({bookmarked: false})
     }
 
     res.status(200).json({bookmarked: true})

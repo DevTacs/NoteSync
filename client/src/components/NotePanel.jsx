@@ -7,19 +7,10 @@ import {useBookmark} from "../context/BookmarkContext"
 import {useGetBookmarksQuery} from "../hooks/queries/note.query"
 
 export default function NotePanel({notes, error, isNoteLoading}) {
-    const {data = [], isBookmarkLoading} = useGetBookmarksQuery()
-    const {setBookmarks} = useBookmark()
-
     useEffect(() => {
         if (error && error.status !== 404)
             showErrorDialog("Error", error.message)
     }, [error])
-
-    useEffect(() => {
-        if (!isBookmarkLoading && data.length > 0) {
-            setBookmarks(data)
-        }
-    }, [data, isBookmarkLoading])
 
     return (
         <div className="flex-[1] flex flex-col">

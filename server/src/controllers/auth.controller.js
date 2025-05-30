@@ -51,6 +51,7 @@ export const register = async (req, res, next) => {
     const {username, email, password} = req.body
 
     const user = await getUserDetailsByEmail(email)
+    console.log(user)
     if (user) return next(createError(400, "User already exists"))
 
     const hashedPassword = await hashPassword(password)
@@ -60,5 +61,9 @@ export const register = async (req, res, next) => {
 }
 
 export const logout = (req, res, next) => {
-    res.send("Logout")
+    res.clearCookie("accessToken")
+    res.clearCookie("refreshToken")
+    req.user = null
+
+    res.status(200).json({message: "Logout successful"})
 }
