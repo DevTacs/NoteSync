@@ -1,5 +1,6 @@
 import {useState, useEffect, useContext, createContext} from "react"
 import {useGetBookmarksQuery} from "../hooks/queries/note.query"
+import {toggleBookmarkService} from "../services/note.service"
 
 const BookmarkContext = createContext()
 
@@ -13,18 +14,20 @@ export const useBookmark = () => {
 }
 
 export const BookmarkProvider = ({children}) => {
-    const {data = [], isBookmarkLoading} = useGetBookmarksQuery()
-    const [bookmarks, setBookmarks] = useState([])
+    const {data: bookmarks = [], refetch, isLoading} = useGetBookmarksQuery()
 
-    useEffect(() => {
-        if (!isBookmarkLoading && data.length > 0) {
-            setBookmarks(data)
+    const toggleBookmark = async (noteID) => {
+        try {
+            await toggleBookmarkService(noteID)
+            await refetch()
+        } catch (error) {
+            console.log(error)
         }
-        console.log(data)
-    }, [data, isBookmarkLoading])
+    }
 
     return (
-        <BookmarkContext.Provider value={{bookmarks, setBookmarks}}>
+        <BookmarkContext.Provider
+            value={{bookmarks, toggleBookmark, isLoading}}>
             {children}
         </BookmarkContext.Provider>
     )

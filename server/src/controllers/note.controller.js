@@ -56,8 +56,8 @@ export const toggleBookmarkController = async (req, res, next) => {
     const alreadyBookmarked = result.bookmarks.includes(note._id)
     if (alreadyBookmarked) {
         await removeBookmarkByIDService(req.user.id, note._id)
-        return res.status(200).json({bookmarked: false})
+        return res.status(200).json({isBookmarked: false})
     }
 
-    res.status(200).json({bookmarked: true})
+    res.status(200).json({isBookmarked: true})
 }

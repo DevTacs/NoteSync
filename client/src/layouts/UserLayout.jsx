@@ -3,6 +3,8 @@ import Header from "../components/Header"
 import ThemeController from "../components/ThemeController"
 import {logout} from "../services/auth.service"
 import {showErrorDialog, showSuccessDialog} from "../utils/alert.util"
+import {useBookmark} from "../context/BookmarkContext"
+import {useEffect, useState} from "react"
 
 export default function UserLayout() {
     const navigate = useNavigate()

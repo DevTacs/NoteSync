@@ -1,6 +1,5 @@
 import NoteForm from "../components/NoteForm"
 import NotePanel from "../components/NotePanel"
-import {BookmarkProvider} from "../context/BookmarkContext"
 import {useGetNotesQuery} from "../hooks/queries/note.query"
 
 export default function NotePage() {
@@ -13,13 +12,7 @@ export default function NotePage() {
                 <NoteForm label={"Create"} />
             </div>
             <div className="divider divider-horizontal"></div>
-            <BookmarkProvider>
-                <NotePanel
-                    notes={notes}
-                    error={error}
-                    isNoteLoading={isLoading}
-                />
-            </BookmarkProvider>
+            <NotePanel notes={notes} error={error} isNoteLoading={isLoading} />
         </div>
     )
 }

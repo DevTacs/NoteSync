@@ -39,7 +39,7 @@ export default function NoteCard({
                     {`${content.substring(0, 100)}...`}
                 </div>
 
-                <div className="flex flex-row justify-end h-5 mt-2">
+                <div className="flex flex-row justify-end items-center h-5 px-2 mt-2">
                     <BookmarkIcon noteID={id} />
                 </div>
             </div>

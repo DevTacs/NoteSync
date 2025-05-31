@@ -2,12 +2,12 @@ import User from "../models/user.model.js"
 
 export const getUserDetailsByEmail = async (email) => {
     const user = await User.findOne({email})
-
-    console.log(user)
     return user
 }
 
-export const createUser = (user) => User.create(user)
+export const createUser = async (user) => {
+    return await User.create(user)
+}
 
 export const getBookmarksService = async (userID) => {
     const {bookmarks} = await User.findById(userID).populate("_id")

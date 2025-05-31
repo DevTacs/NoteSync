@@ -9,6 +9,7 @@ export const getNotesService = async () => {
 
 export const getNoteByIDService = async (noteID) => {
     const {data} = await axios.get(`${backendUrl}/api/notes/${noteID}`)
+    console.log(data)
     return data
 }
 
@@ -19,6 +20,7 @@ export const createNoteService = async (noteData) => {
 
 export const getBookmarksService = async () => {
     const {data} = await axios.get(`${backendUrl}/api/notes/bookmarks`)
+    console.log(data)
     return data
 }
 

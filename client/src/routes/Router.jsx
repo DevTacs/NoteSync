@@ -89,7 +89,11 @@ const Router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <NotePage />,
+                        element: (
+                            <BookmarkProvider>
+                                <NotePage />
+                            </BookmarkProvider>
+                        ),
                     },
                     {path: ":id", element: <ViewNotePage />},
                 ],
