@@ -10,7 +10,7 @@ export const createUser = async (user) => {
 }
 
 export const getBookmarksService = async (userID) => {
-    const {bookmarks} = await User.findById(userID).populate("_id")
+    const {bookmarks} = await User.findById(userID).populate("bookmarks")
     return bookmarks
 }
 

@@ -6,7 +6,7 @@ import {showErrorDialog} from "../utils/alert.util"
 import {useBookmark} from "../context/BookmarkContext"
 import {useGetBookmarksQuery} from "../hooks/queries/note.query"
 
-export default function NotePanel({notes, error, isNoteLoading}) {
+export default function NotePanel({label, notes, error, isNoteLoading}) {
     useEffect(() => {
         if (error && error.status !== 404)
             showErrorDialog("Error", error.message)
@@ -14,7 +14,7 @@ export default function NotePanel({notes, error, isNoteLoading}) {
 
     return (
         <div className="flex-[1] flex flex-col">
-            <NoteHeader title="Notes" />
+            <NoteHeader title={label} />
             <div className="mt-5">
                 {notes.length === 0 && !isNoteLoading && (
                     <p className=" p-4 bg-accent text-2xl text-center rounded-md">

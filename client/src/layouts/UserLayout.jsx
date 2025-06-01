@@ -7,6 +7,7 @@ import {useBookmark} from "../context/BookmarkContext"
 import {useEffect, useState} from "react"
 
 export default function UserLayout() {
+    const {bookmarks} = useBookmark()
     const navigate = useNavigate()
 
     const handleLogout = async () => {
@@ -30,7 +31,7 @@ export default function UserLayout() {
                         <Link to="bookmarks">
                             Bookmarks
                             <div className="badge badge-accent text-xs p-1">
-                                0
+                                {bookmarks.length}
                             </div>
                         </Link>
                     </li>

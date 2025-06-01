@@ -12,7 +12,12 @@ export default function NotePage() {
                 <NoteForm label={"Create"} />
             </div>
             <div className="divider divider-horizontal"></div>
-            <NotePanel notes={notes} error={error} isNoteLoading={isLoading} />
+            <NotePanel
+                label="Notes"
+                notes={notes}
+                error={error}
+                isNoteLoading={isLoading}
+            />
         </div>
     )
 }

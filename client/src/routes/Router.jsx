@@ -68,7 +68,9 @@ const Router = createBrowserRouter([
         id: "user",
         element: (
             <ProtectedRoute>
-                <UserLayout />
+                <BookmarkProvider>
+                    <UserLayout />
+                </BookmarkProvider>
             </ProtectedRoute>
         ),
         loader: async () => {
@@ -89,11 +91,7 @@ const Router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: (
-                            <BookmarkProvider>
-                                <NotePage />
-                            </BookmarkProvider>
-                        ),
+                        element: <NotePage />,
                     },
                     {path: ":id", element: <ViewNotePage />},
                 ],

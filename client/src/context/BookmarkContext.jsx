@@ -1,6 +1,6 @@
-import {useState, useEffect, useContext, createContext} from "react"
+import {useContext, createContext} from "react"
 import {useGetBookmarksQuery} from "../hooks/queries/note.query"
-import {toggleBookmarkService} from "../services/note.service"
+import {useToggleBookmarkMutation} from "../hooks/mutations/note.mutation"
 
 const BookmarkContext = createContext()
 
@@ -14,20 +14,27 @@ export const useBookmark = () => {
 }
 
 export const BookmarkProvider = ({children}) => {
-    const {data: bookmarks = [], refetch, isLoading} = useGetBookmarksQuery()
+    const {data: bookmarks = [], isLoading, isError} = useGetBookmarksQuery()
+    const {mutateAsync, data} = useToggleBookmarkMutation()
 
     const toggleBookmark = async (noteID) => {
         try {
-            await toggleBookmarkService(noteID)
-            await refetch()
+            await mutateAsync(noteID)
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
     }
 
+    const values = {
+        bookmarks,
+        toggleBookmark,
+        isError,
+        isLoading,
+    }
+
     return (
-        <BookmarkContext.Provider
-            value={{bookmarks, toggleBookmark, isLoading}}>
+        <BookmarkContext.Provider value={values}>
             {children}
         </BookmarkContext.Provider>
     )
